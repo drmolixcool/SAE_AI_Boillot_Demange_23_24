@@ -15,10 +15,10 @@ pour i de 0 à la taille de inputs{
     error = mlp.backPropagate(inputs[i], outputs[i])
     afficher error
 }
-// Plus l'erreur est basse, plus l'apprenstisage est bon
+// Plus l'erreur est basse, plus l'apprentissage est bon
 
 
-// Pour éxécuter le perceptron multi couches
+// Pour exécuter le perceptron multi couches
 input = lire entrée
 res = mlp.execute(input)
 afficher res;
