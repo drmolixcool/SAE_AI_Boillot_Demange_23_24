@@ -1,0 +1,25 @@
+
+// Configuration du multipercetrons
+nblayers = lire // Liste vide avec pour taille le nombre de couches
+learningRate = lire // Double correspondant au taux d'apprentisage
+transferFunction = lire // Fontion de transfert
+
+mlp = MLP(nbLayers, learningRate, transferFunction)
+
+//Apprentisage
+
+inputs = lire exemples
+outputs = lire sorties souhaitée des exemples
+
+pour i de 0 à la taille de inputs{
+    error = mlp.backPropagate(inputs[i], outputs[i])
+    afficher error
+}
+// Plus l'erreur est basse, plus l'apprenstisage est bon
+
+
+// Pour éxécuter le perceptron multi couches
+input = lire entrée
+res = mlp.execute(input)
+afficher res;
+
