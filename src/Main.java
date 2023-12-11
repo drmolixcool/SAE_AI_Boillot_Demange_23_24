@@ -15,11 +15,11 @@ public class Main {
         return ints.get(i);
     }
 
-    public static double[][] transformInput(double[][] array, double falseValue) {
+    public static double[][] transformInput(double[][] array, FalseValue transferFunction) {
         for (int x = 0; x < array.length; x++) {
             for (int y = 0; y < array[0].length; y++) {
                 if (array[x][y] == 0 || array[x][y] == -1) {
-                    array[x][y] = falseValue;
+                    array[x][y] = transferFunction.getFalseValue();
                 }
             }
         }
