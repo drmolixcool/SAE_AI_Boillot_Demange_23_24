@@ -1,7 +1,30 @@
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class Main {
+
+    public static int getRandomIndexWhichFalse(List<Boolean> booleans) {
+        Random random = new Random();
+        ArrayList<Integer> ints = new ArrayList<>();
+        for (int i = 0; i < booleans.size(); i++) {
+            if (!booleans.get(i)) {
+                ints.add(i);
+            }
+        }
+        int i = random.nextInt(ints.size());
+        return ints.get(i);
+    }
+
+    public static double[][] transformInput(double[][] array, double falseValue) {
+        for (int x = 0; x < array.length; x++) {
+            for (int y = 0; y < array[0].length; y++) {
+                if (array[x][y] == 0 || array[x][y] == -1) {
+                    array[x][y] = falseValue;
+                }
+            }
+        }
+        return array;
+    }
     public static void main(String[] args) throws Exception {
         int[] layers = {2,2,1};
         double learningRate = Double.parseDouble(args[0]);
