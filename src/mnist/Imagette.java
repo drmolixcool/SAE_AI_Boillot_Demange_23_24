@@ -5,9 +5,10 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Imagette {
+public class Imagette implements Serializable {
     private final int[][] pixels;
 
     private final Integer etiquette;

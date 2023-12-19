@@ -1,14 +1,15 @@
 package mnist;
 
+import mnist.Etiquette;
+import mnist.Imagette;
+
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.io.Serializable;
+import java.util.*;
 
-public class Donnees {
+public class Donnees implements Serializable {
     private List<Imagette> liste;
 
     Donnees(String fichier, Etiquette etiquettes, Integer limit) throws IOException {
@@ -49,7 +50,28 @@ public class Donnees {
         return Collections.unmodifiableList(this.liste);
     }
 
+    @Deprecated
     public Donnees limit(int nb_limit) {
         return new Donnees(liste.stream().limit(nb_limit).toList());
+    }
+
+    public Donnees equalsEtiquette() {
+        ArrayList<Imagette> imagettes = new ArrayList<>(this.liste);
+        Collections.shuffle(imagettes);
+
+        HashMap<Integer, List<Imagette>> etiquetteListHashMap = new HashMap<>();
+        for (Imagette imagette : imagettes) {
+            etiquetteListHashMap.putIfAbsent(imagette.getEtiquette(), new ArrayList<>());
+            etiquetteListHashMap.get(imagette.getEtiquette()).add(imagette);
+        }
+        int min_length = etiquetteListHashMap.values().stream().mapToInt(List::size).min().orElse(0);
+        List<Imagette> result = etiquetteListHashMap.values().stream()
+                .map((List<Imagette> liste) -> liste.subList(0, min_length))
+                .flatMap(Collection::stream)
+                .toList();
+
+        Collections.shuffle(imagettes);
+
+        return new Donnees(result);
     }
 }
