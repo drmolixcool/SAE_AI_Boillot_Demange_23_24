@@ -1,8 +1,5 @@
 package mnist;
 
-import mnist.Etiquette;
-import mnist.Imagette;
-
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;

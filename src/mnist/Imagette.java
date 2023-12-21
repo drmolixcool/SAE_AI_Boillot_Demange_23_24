@@ -1,12 +1,10 @@
 package mnist;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Arrays;
 
 public class Imagette implements Serializable {
     private final int[][] pixels;
@@ -39,7 +37,6 @@ public class Imagette implements Serializable {
         }
         ImageIO.write(bufferedImage, "png", file);
     }
-
 
 
     @Override

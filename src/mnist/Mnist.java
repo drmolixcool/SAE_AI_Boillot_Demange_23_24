@@ -4,8 +4,14 @@ import mlp.FalseValue;
 import mlp.MLP;
 import mlp.SigmoidFunction;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class Mnist {
@@ -21,16 +27,16 @@ public class Mnist {
     }
 
     public Mnist(String folder) throws IOException {
-        String train_labels = folder+"/train-labels.idx1-ubyte";
+        String train_labels = folder + "/train-labels.idx1-ubyte";
         Etiquette etiquettes = new Etiquette(train_labels);
 
-        String train_images = folder+"/train-images.idx3-ubyte";
+        String train_images = folder + "/train-images.idx3-ubyte";
         images = new Donnees(train_images, etiquettes);
 
-        String test_labels = folder+"/t10k-labels.idx1-ubyte";
+        String test_labels = folder + "/t10k-labels.idx1-ubyte";
         Etiquette etiquettes_test = new Etiquette(test_labels);
 
-        String test_images = folder+"/t10k-images.idx3-ubyte";
+        String test_images = folder + "/t10k-images.idx3-ubyte";
         images_test = new Donnees(test_images, etiquettes_test);
     }
 
@@ -143,8 +149,8 @@ public class Mnist {
                 double[] output = mlp.execute(input);
                 checked.add(extractResult(output) == imagette.getEtiquette());
             }
-            System.out.println("iter "+iter+" = " + checked.stream().filter(aBoolean -> aBoolean).count() * 100.0 / checked.size());
-            System.out.println("iter "+iter+" = " + learn_errors.stream().mapToDouble(value -> value).average().orElse(0));
+            System.out.println("iter " + iter + " = " + checked.stream().filter(aBoolean -> aBoolean).count() * 100.0 / checked.size());
+            System.out.println("iter " + iter + " = " + learn_errors.stream().mapToDouble(value -> value).average().orElse(0));
         }
 
         return checked.stream().filter(Boolean::booleanValue).count() * 100.0 / checked.size();
